@@ -1,16 +1,15 @@
-using System;
-using DevExpress.Xpo;
-using System.ComponentModel;
 using DevExpress.Persistent.Base;
-using System.Collections.Generic;
-using DevExpress.ExpressApp.Security.Strategy;
+using DevExpress.Persistent.BaseImpl.PermissionPolicy;
 using DevExpress.Persistent.Validation;
+using DevExpress.Xpo;
+using System;
+using System.ComponentModel;
 
 namespace MainDemo.Module.BusinessObjects {
     [DefaultClassOptions]
     [DefaultProperty("FullName")]
     [ImageName("BO_User")]
-    public class Employee : SecuritySystemUser {
+    public class Employee : PermissionPolicyUser {
         private string _LastName;
         private string _FirstName;
         private Department department;
