@@ -1,3 +1,14 @@
+<!-- default file list -->
+*Files to look at*:
+
+* [Department.cs](./CS/MainDemo.Module/BusinessObjects/Department.cs) (VB: [Department.vb](./VB/MainDemo.Module/BusinessObjects/Department.vb))
+* [Employee.cs](./CS/MainDemo.Module/BusinessObjects/Employee.cs) (VB: [EmployeeTask.vb](./VB/MainDemo.Module/BusinessObjects/EmployeeTask.vb))
+* [EmployeeTask.cs](./CS/MainDemo.Module/BusinessObjects/EmployeeTask.cs) (VB: [EmployeeTask.vb](./VB/MainDemo.Module/BusinessObjects/EmployeeTask.vb))
+* **[Updater.cs](./CS/MainDemo.Module/DatabaseUpdate/Updater.cs) (VB: [Updater.vb](./VB/MainDemo.Module/DatabaseUpdate/Updater.vb))**
+* [MainDemoModule.cs](./CS/MainDemo.Module/MainDemoModule.cs) (VB: [MainDemoModule.vb](./VB/MainDemo.Module/MainDemoModule.vb))
+* [WebApplication.cs](./CS/MainDemo.Web/WebApplication.cs) (VB: [WebApplication.vb](./VB/MainDemo.Web/WebApplication.vb))
+* [MainDemoWinApplication.cs](./CS/MainDemo.Win/MainDemoWinApplication.cs) (VB: [MainDemoWinApplication.vb](./VB/MainDemo.Win/MainDemoWinApplication.vb))
+<!-- default file list end -->
 # How to separate employees data in different departments using security permissions in XPO
 
 
