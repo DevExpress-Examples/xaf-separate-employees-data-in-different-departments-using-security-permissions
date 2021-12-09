@@ -11,15 +11,15 @@
 This example demonstrates how to use [XAF's security system](https://docs.devexpress.com/eXpressAppFramework/113366/concepts/security-system) to implement the following access control/authorization requirements:
 - Users Role (users: **Joe, John**) can view and edit tasks from their own department, but cannot delete or create tasks. Users also have readonly access to employees and other data of their own department.
 
-![](./media/Users.png)
+  ![](./media/Users.png)
 
 - Managers Role (users: **Sam, Mary**) can fully manage (CRUD) their own department, its employees and tasks. Managers cannot access data from other departments.
 
-![](./media/Managers.png)
+  ![](./media/Managers.png)
 
 - Administrators Role (users: **Admin**) can do everything within the application.
 
-![](./media/Administrators.png)
+  ![](./media/Administrators.png)
 
 All users have empty passwords by default. [Functional tests](https://docs.devexpress.com/eXpressAppFramework/113211/concepts/debugging-testing-and-error-handling/functional-tests-easy-test) for these scenarios are in the *SolutionName.EasyTests* folder.
 
