@@ -223,16 +223,14 @@ public class Updater : ModuleUpdater {
 
         //Department
         role.AddObjectPermissionFromLambda<Department>(SecurityOperations.Read, d => d.ApplicationUsers.Any(au => au.ID == (int)CurrentUserIdOperator.CurrentUserId()), SecurityPermissionState.Allow);
-        role.AddMemberPermissionFromLambda<Department>(SecurityOperations.Read, nameof(Department.ApplicationUsers), d => d.ApplicationUsers.Any(au => au.ID == (int)CurrentUserIdOperator.CurrentUserId()), SecurityPermissionState.Allow);
 
         //ApplicationUser
         role.AddObjectPermissionFromLambda<ApplicationUser>(SecurityOperations.Read, au => au.ID == (int)CurrentUserIdOperator.CurrentUserId(), SecurityPermissionState.Allow);
-        role.AddMemberPermissionFromLambda<ApplicationUser>(SecurityOperations.Read, nameof(ApplicationUser.Department), au => au.ID == (int)CurrentUserIdOperator.CurrentUserId(), SecurityPermissionState.Allow);
         role.AddObjectPermissionFromLambda<ApplicationUser>(SecurityOperations.Read, au => au.Department.ApplicationUsers.Any(au2 => au2.ID == (int)CurrentUserIdOperator.CurrentUserId()), SecurityPermissionState.Allow);
 
         //MyTask
         role.AddObjectPermissionFromLambda<MyTask>(SecurityOperations.Read, t => t.AssignedUser.ID == (int)CurrentUserIdOperator.CurrentUserId(), SecurityPermissionState.Allow);
-        role.AddObjectPermissionFromLambda<MyTask>(SecurityOperations.Read, t => t.AssignedUser.Department.ApplicationUsers.Any(au2 => au2.ID == (int)CurrentUserIdOperator.CurrentUserId()) && t.IsSharedTask, SecurityPermissionState.Allow);
+        role.AddObjectPermissionFromLambda<MyTask>(SecurityOperations.Read, t => t.AssignedUser.Department.ApplicationUsers.Any(au => au.ID == (int)CurrentUserIdOperator.CurrentUserId()) && t.IsSharedTask, SecurityPermissionState.Allow);
 
         //DepartmentGoal
         role.AddObjectPermissionFromLambda<DepartmentGoal>(SecurityOperations.Read, dr => dr.Department.ApplicationUsers.Any(au => au.ID == (int)CurrentUserIdOperator.CurrentUserId()), SecurityPermissionState.Allow);
