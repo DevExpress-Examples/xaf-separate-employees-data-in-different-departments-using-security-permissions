@@ -39,6 +39,9 @@ public class ApplicationBuilder : IDesignTimeApplicationFactory {
                 options.RoleType = typeof(PermissionPolicyRole);
                 options.UserType = typeof(FilterRecords.Module.BusinessObjects.ApplicationUser);
                 options.UserLoginInfoType = typeof(FilterRecords.Module.BusinessObjects.ApplicationUserLoginInfo);
+                options.Events.OnSecurityStrategyCreated = securityStrategy => {
+                    ((SecurityStrategy)securityStrategy).AssociationPermissionsMode = AssociationPermissionsMode.Manual;
+                };
             })
             .UsePasswordAuthentication();
         builder.AddBuildStep(application => {
