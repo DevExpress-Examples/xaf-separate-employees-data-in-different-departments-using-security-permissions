@@ -24,20 +24,8 @@ public class Updater : ModuleUpdater {
         //    theObject = ObjectSpace.CreateObject<EntityObject1>();
         //    theObject.Name = name;
         //}
-        ApplicationUser sampleUser = ObjectSpace.FirstOrDefault<ApplicationUser>(u => u.UserName == "User");
-        if(sampleUser == null) {
-            sampleUser = ObjectSpace.CreateObject<ApplicationUser>();
-            sampleUser.UserName = "User";
-            // Set a password if the standard authentication type is used
-            sampleUser.SetPassword("");
-
-            // The UserLoginInfo object requires a user object Id (Oid).
-            // Commit the user object to the database before you create a UserLoginInfo object. This will correctly initialize the user key property.
-            ObjectSpace.CommitChanges(); //This line persi sts created object(s).
-            ((ISecurityUserWithLoginInfo)sampleUser).CreateUserLoginInfo(SecurityDefaults.PasswordAuthentication, ObjectSpace.GetKeyValueAsString(sampleUser));
-        }
+        
         PermissionPolicyRole defaultRole = CreateDefaultRole();
-        sampleUser.Roles.Add(defaultRole);
 
         ApplicationUser userAdmin = ObjectSpace.FirstOrDefault<ApplicationUser>(u => u.UserName == "Admin");
         if(userAdmin == null) {
