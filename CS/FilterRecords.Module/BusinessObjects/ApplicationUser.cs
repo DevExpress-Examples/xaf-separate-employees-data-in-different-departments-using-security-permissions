@@ -8,7 +8,7 @@ using DevExpress.Persistent.BaseImpl.EF.PermissionPolicy;
 namespace FilterRecords.Module.BusinessObjects;
 
 [DefaultProperty(nameof(UserName))]
-public class ApplicationUser : PermissionPolicyUser, IObjectSpaceLink, ISecurityUserWithLoginInfo, INotifyPropertyChanged {
+public class ApplicationUser : PermissionPolicyUser, ISecurityUserWithLoginInfo {
     public ApplicationUser() : base() {
         UserLogins = new List<ApplicationUserLoginInfo>();
         _myTasks = new ObservableCollection<MyTask>();
@@ -27,18 +27,11 @@ public class ApplicationUser : PermissionPolicyUser, IObjectSpaceLink, ISecurity
         return result;
     }
 
-    Department department;
-    public virtual Department Department {
-        get => department;
-        set => SetReferencePropertyValue(ref department, value);
-    }
+    public virtual Department Department { get; set; }
 
     ObservableCollection<MyTask> _myTasks;
     public virtual IList<MyTask> MyTasks {
         get => _myTasks;
     }
-    public event PropertyChangedEventHandler PropertyChanged;
-    protected void OnPropertyChanged([CallerMemberName] string propertyName = null) {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
+  
 }

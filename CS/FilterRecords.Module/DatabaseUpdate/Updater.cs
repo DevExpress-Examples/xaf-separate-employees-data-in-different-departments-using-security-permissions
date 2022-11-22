@@ -184,18 +184,18 @@ public class Updater : ModuleUpdater {
         role.AddNavigationPermission("Application/NavigationItems/Items/Default/Items/MyTask_ListView", SecurityPermissionState.Allow);
 
         //Department
-        role.AddObjectPermissionFromLambda<Department>(SecurityOperations.FullObjectAccess, d => d.ApplicationUsers.Any(au => au.ID == (int)CurrentUserIdOperator.CurrentUserId()), SecurityPermissionState.Allow);
-        role.AddMemberPermissionFromLambda<Department>(SecurityOperations.ReadWriteAccess, nameof(Department.ApplicationUsers), d => d.ApplicationUsers.Any(au => au.ID == (int)CurrentUserIdOperator.CurrentUserId()), SecurityPermissionState.Allow);
+        role.AddObjectPermissionFromLambda<Department>(SecurityOperations.FullObjectAccess, d => d.ApplicationUsers.Any(au => au.ID == (Guid)CurrentUserIdOperator.CurrentUserId()), SecurityPermissionState.Allow);
+        role.AddMemberPermissionFromLambda<Department>(SecurityOperations.ReadWriteAccess, nameof(Department.ApplicationUsers), d => d.ApplicationUsers.Any(au => au.ID == (Guid)CurrentUserIdOperator.CurrentUserId()), SecurityPermissionState.Allow);
 
         //ApplicationUser
-        role.AddObjectPermissionFromLambda<ApplicationUser>(SecurityOperations.FullObjectAccess, au => au.ID == (int)CurrentUserIdOperator.CurrentUserId(), SecurityPermissionState.Allow);
-        role.AddObjectPermissionFromLambda<ApplicationUser>(SecurityOperations.ReadWriteAccess, au => au.Department.ApplicationUsers.Any(au2 => au2.ID == (int)CurrentUserIdOperator.CurrentUserId()), SecurityPermissionState.Allow);
+        role.AddObjectPermissionFromLambda<ApplicationUser>(SecurityOperations.FullObjectAccess, au => au.ID == (Guid)CurrentUserIdOperator.CurrentUserId(), SecurityPermissionState.Allow);
+        role.AddObjectPermissionFromLambda<ApplicationUser>(SecurityOperations.ReadWriteAccess, au => au.Department.ApplicationUsers.Any(au2 => au2.ID == (Guid)CurrentUserIdOperator.CurrentUserId()), SecurityPermissionState.Allow);
 
         //MyTask
-        role.AddObjectPermissionFromLambda<MyTask>(SecurityOperations.FullObjectAccess, t => t.AssignedUser.Department.ApplicationUsers.Any(au2 => au2.ID == (int)CurrentUserIdOperator.CurrentUserId()), SecurityPermissionState.Allow);
+        role.AddObjectPermissionFromLambda<MyTask>(SecurityOperations.FullObjectAccess, t => t.AssignedUser.Department.ApplicationUsers.Any(au2 => au2.ID == (Guid)CurrentUserIdOperator.CurrentUserId()), SecurityPermissionState.Allow);
 
         //DepartmentGoal
-        role.AddObjectPermissionFromLambda<DepartmentGoal>(SecurityOperations.FullObjectAccess, dr => dr.Department.ApplicationUsers.Any(au => au.ID == (int)CurrentUserIdOperator.CurrentUserId()), SecurityPermissionState.Allow);
+        role.AddObjectPermissionFromLambda<DepartmentGoal>(SecurityOperations.FullObjectAccess, dr => dr.Department.ApplicationUsers.Any(au => au.ID == (Guid)CurrentUserIdOperator.CurrentUserId()), SecurityPermissionState.Allow);
 
         return role;
     }
@@ -210,18 +210,18 @@ public class Updater : ModuleUpdater {
         role.AddNavigationPermission("Application/NavigationItems/Items/Default/Items/MyTask_ListView", SecurityPermissionState.Allow);
 
         //Department
-        role.AddObjectPermissionFromLambda<Department>(SecurityOperations.Read, d => d.ApplicationUsers.Any(au => au.ID == (int)CurrentUserIdOperator.CurrentUserId()), SecurityPermissionState.Allow);
+        role.AddObjectPermissionFromLambda<Department>(SecurityOperations.Read, d => d.ApplicationUsers.Any(au => au.ID == (Guid)CurrentUserIdOperator.CurrentUserId()), SecurityPermissionState.Allow);
 
         //ApplicationUser
-        role.AddObjectPermissionFromLambda<ApplicationUser>(SecurityOperations.Read, au => au.ID == (int)CurrentUserIdOperator.CurrentUserId(), SecurityPermissionState.Allow);
-        role.AddObjectPermissionFromLambda<ApplicationUser>(SecurityOperations.Read, au => au.Department.ApplicationUsers.Any(au2 => au2.ID == (int)CurrentUserIdOperator.CurrentUserId()), SecurityPermissionState.Allow);
+        role.AddObjectPermissionFromLambda<ApplicationUser>(SecurityOperations.Read, au => au.ID == (Guid)CurrentUserIdOperator.CurrentUserId(), SecurityPermissionState.Allow);
+        role.AddObjectPermissionFromLambda<ApplicationUser>(SecurityOperations.Read, au => au.Department.ApplicationUsers.Any(au2 => au2.ID == (Guid)CurrentUserIdOperator.CurrentUserId()), SecurityPermissionState.Allow);
 
         //MyTask
-        role.AddObjectPermissionFromLambda<MyTask>(SecurityOperations.Read, t => t.AssignedUser.ID == (int)CurrentUserIdOperator.CurrentUserId(), SecurityPermissionState.Allow);
-        role.AddObjectPermissionFromLambda<MyTask>(SecurityOperations.Read, t => t.AssignedUser.Department.ApplicationUsers.Any(au => au.ID == (int)CurrentUserIdOperator.CurrentUserId()) && t.IsSharedTask, SecurityPermissionState.Allow);
+        role.AddObjectPermissionFromLambda<MyTask>(SecurityOperations.Read, t => t.AssignedUser.ID == (Guid)CurrentUserIdOperator.CurrentUserId(), SecurityPermissionState.Allow);
+        role.AddObjectPermissionFromLambda<MyTask>(SecurityOperations.Read, t => t.AssignedUser.Department.ApplicationUsers.Any(au => au.ID == (Guid)CurrentUserIdOperator.CurrentUserId()) && t.IsSharedTask, SecurityPermissionState.Allow);
 
         //DepartmentGoal
-        role.AddObjectPermissionFromLambda<DepartmentGoal>(SecurityOperations.Read, dr => dr.Department.ApplicationUsers.Any(au => au.ID == (int)CurrentUserIdOperator.CurrentUserId()), SecurityPermissionState.Allow);
+        role.AddObjectPermissionFromLambda<DepartmentGoal>(SecurityOperations.Read, dr => dr.Department.ApplicationUsers.Any(au => au.ID == (Guid)CurrentUserIdOperator.CurrentUserId()), SecurityPermissionState.Allow);
 
         return role;
     }
@@ -231,10 +231,10 @@ public class Updater : ModuleUpdater {
             defaultRole = ObjectSpace.CreateObject<PermissionPolicyRole>();
             defaultRole.Name = "Default";
 
-            defaultRole.AddObjectPermissionFromLambda<ApplicationUser>(SecurityOperations.Read, cm => cm.ID == (int)CurrentUserIdOperator.CurrentUserId(), SecurityPermissionState.Allow);
+            defaultRole.AddObjectPermissionFromLambda<ApplicationUser>(SecurityOperations.Read, cm => cm.ID == (Guid)CurrentUserIdOperator.CurrentUserId(), SecurityPermissionState.Allow);
             defaultRole.AddNavigationPermission(@"Application/NavigationItems/Items/Default/Items/MyDetails", SecurityPermissionState.Allow);
-            defaultRole.AddMemberPermissionFromLambda<ApplicationUser>(SecurityOperations.Write, "ChangePasswordOnFirstLogon", cm => cm.ID == (int)CurrentUserIdOperator.CurrentUserId(), SecurityPermissionState.Allow);
-            defaultRole.AddMemberPermissionFromLambda<ApplicationUser>(SecurityOperations.Write, "StoredPassword", cm => cm.ID == (int)CurrentUserIdOperator.CurrentUserId(), SecurityPermissionState.Allow);
+            defaultRole.AddMemberPermissionFromLambda<ApplicationUser>(SecurityOperations.Write, "ChangePasswordOnFirstLogon", cm => cm.ID == (Guid)CurrentUserIdOperator.CurrentUserId(), SecurityPermissionState.Allow);
+            defaultRole.AddMemberPermissionFromLambda<ApplicationUser>(SecurityOperations.Write, "StoredPassword", cm => cm.ID == (Guid)CurrentUserIdOperator.CurrentUserId(), SecurityPermissionState.Allow);
             defaultRole.AddTypePermissionsRecursively<PermissionPolicyRole>(SecurityOperations.Read, SecurityPermissionState.Deny);
             defaultRole.AddTypePermissionsRecursively<ModelDifference>(SecurityOperations.ReadWriteAccess, SecurityPermissionState.Allow);
             defaultRole.AddTypePermissionsRecursively<ModelDifferenceAspect>(SecurityOperations.ReadWriteAccess, SecurityPermissionState.Allow);

@@ -16,9 +16,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="DevExpress.ExpressApp.Blazor" Version="22.2.2-beta" />
-    <PackageReference Include="DevExpress.ExpressApp.CodeAnalysis" Version="22.2.2-beta" />
-    <PackageReference Include="DevExpress.ExpressApp.Validation.Blazor" Version="22.2.2-beta" />
+    <PackageReference Include="DevExpress.ExpressApp.Blazor" Version="22.1.5" />
+    <PackageReference Include="DevExpress.ExpressApp.CodeAnalysis" Version="22.1.5" />
+    <PackageReference Include="DevExpress.ExpressApp.Validation.Blazor" Version="22.1.5" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FilterRecords.Module\FilterRecords.Module.csproj" />
