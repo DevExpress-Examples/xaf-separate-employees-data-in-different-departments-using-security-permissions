@@ -1,5 +1,4 @@
-﻿using DevExpress.ExpressApp.EFCore.Updating;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using DevExpress.Persistent.BaseImpl.EF.PermissionPolicy;
 using DevExpress.Persistent.BaseImpl.EF;
@@ -13,7 +12,9 @@ namespace FilterRecords.Module.BusinessObjects;
 public class FilterRecordsContextInitializer : DbContextTypesInfoInitializerBase {
 	protected override DbContext CreateDbContext() {
 		var optionsBuilder = new DbContextOptionsBuilder<FilterRecordsEFCoreDbContext>()
-            .UseSqlServer(@";");
+            .UseSqlServer(@";")
+			.UseChangeTrackingProxies()
+			.UseObjectSpaceLinkProxies();
         return new FilterRecordsEFCoreDbContext(optionsBuilder.Options);
 	}
 }
@@ -23,6 +24,8 @@ public class FilterRecordsDesignTimeDbContextFactory : IDesignTimeDbContextFacto
 		throw new InvalidOperationException("Make sure that the database connection string and connection provider are correct. After that, uncomment the code below and remove this exception.");
 		//var optionsBuilder = new DbContextOptionsBuilder<FilterRecordsEFCoreDbContext>();
 		//optionsBuilder.UseSqlServer(@"Integrated Security=SSPI;Pooling=false;Data Source=(localdb)\\mssqllocaldb;Initial Catalog=FilterRecords");
+		//optionsBuilder.UseChangeTrackingProxies();
+		//optionsBuilder.UseObjectSpaceLinkProxies();
 		//return new FilterRecordsEFCoreDbContext(optionsBuilder.Options);
 	}
 }
@@ -42,6 +45,7 @@ public class FilterRecordsEFCoreDbContext : DbContext {
     
 
     protected override void OnModelCreating(ModelBuilder modelBuilder) {
+		modelBuilder.HasChangeTrackingStrategy(ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues);
         modelBuilder.Entity<FilterRecords.Module.BusinessObjects.ApplicationUserLoginInfo>(b => {
             b.HasIndex(nameof(DevExpress.ExpressApp.Security.ISecurityUserLoginInfo.LoginProviderName), nameof(DevExpress.ExpressApp.Security.ISecurityUserLoginInfo.ProviderUserKey)).IsUnique();
         });

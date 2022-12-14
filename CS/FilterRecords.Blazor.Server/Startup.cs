@@ -56,6 +56,8 @@ public class Startup {
                     ArgumentNullException.ThrowIfNull(connectionString);
                     options.UseSqlServer(connectionString);
                     options.UseLazyLoadingProxies();
+                    options.UseChangeTrackingProxies();
+                    options.UseObjectSpaceLinkProxies();
                 })
                 .AddNonPersistent();
             builder.Security

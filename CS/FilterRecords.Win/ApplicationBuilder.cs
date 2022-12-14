@@ -32,6 +32,8 @@ public class ApplicationBuilder : IDesignTimeApplicationFactory {
                 // We recommend that you refer to the following help topic before you use an in-memory database: https://docs.microsoft.com/en-us/ef/core/testing/in-memory
                 //options.UseInMemoryDatabase("InMemory");
                 options.UseSqlServer(connectionString);
+                options.UseChangeTrackingProxies();
+                options.UseObjectSpaceLinkProxies();
             })
             .AddNonPersistent();
         builder.Security
