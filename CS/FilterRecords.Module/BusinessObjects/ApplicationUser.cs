@@ -21,6 +21,6 @@ public class ApplicationUser : PermissionPolicyUser, ISecurityUserWithLoginInfo 
     }
 
     public virtual Department Department { get; set; }
-    public virtual IList<MyTask> MyTasks { get; set; } = new ObservableCollection<MyTask>();
+    public virtual IList<EmployeeTask> Tasks { get; set; } = new ObservableCollection<EmployeeTask>();
   
 }

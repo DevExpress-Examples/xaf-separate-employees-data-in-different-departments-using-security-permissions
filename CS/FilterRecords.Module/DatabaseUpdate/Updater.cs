@@ -107,57 +107,57 @@ public class Updater : ModuleUpdater {
             manager2.Roles.Add(managerRole);
             manager2.Roles.Add(defaultRole);
 
-            var task11 = ObjectSpace.CreateObject<MyTask>();
+            var task11 = ObjectSpace.CreateObject<EmployeeTask>();
             task11.Subject = "Task11";
-            task11.AssignedUser = user1;
+            task11.AssignedTo = user1;
 
-            var task12 = ObjectSpace.CreateObject<MyTask>();
+            var task12 = ObjectSpace.CreateObject<EmployeeTask>();
             task12.Subject = "Task12";
-            task12.AssignedUser = user1;
+            task12.AssignedTo = user1;
 
-            var task1Shared = ObjectSpace.CreateObject<MyTask>();
+            var task1Shared = ObjectSpace.CreateObject<EmployeeTask>();
             task1Shared.Subject = "Task1Shared";
             task1Shared.IsSharedTask = true;
-            task1Shared.AssignedUser = user1;
+            task1Shared.AssignedTo = user1;
 
-            var task121 = ObjectSpace.CreateObject<MyTask>();
+            var task121 = ObjectSpace.CreateObject<EmployeeTask>();
             task121.Subject = "task121";
-            task121.AssignedUser = user12;
+            task121.AssignedTo = user12;
 
-            var task122 = ObjectSpace.CreateObject<MyTask>();
+            var task122 = ObjectSpace.CreateObject<EmployeeTask>();
             task122.Subject = "task122";
-            task122.AssignedUser = user12;
+            task122.AssignedTo = user12;
 
-            var task12Shared = ObjectSpace.CreateObject<MyTask>();
+            var task12Shared = ObjectSpace.CreateObject<EmployeeTask>();
             task12Shared.Subject = "task12Shared";
             task12Shared.IsSharedTask = true;
-            task12Shared.AssignedUser = user12;
+            task12Shared.AssignedTo = user12;
 
-            var task21 = ObjectSpace.CreateObject<MyTask>();
+            var task21 = ObjectSpace.CreateObject<EmployeeTask>();
             task21.Subject = "Task21";
-            task21.AssignedUser = user2;
+            task21.AssignedTo = user2;
 
-            var task22 = ObjectSpace.CreateObject<MyTask>();
+            var task22 = ObjectSpace.CreateObject<EmployeeTask>();
             task22.Subject = "Task22";
-            task22.AssignedUser = user2;
+            task22.AssignedTo = user2;
 
-            var task2Shared = ObjectSpace.CreateObject<MyTask>();
+            var task2Shared = ObjectSpace.CreateObject<EmployeeTask>();
             task2Shared.Subject = "Task2Shared";
             task2Shared.IsSharedTask = true;
-            task2Shared.AssignedUser = user2;
+            task2Shared.AssignedTo = user2;
 
-            var task221 = ObjectSpace.CreateObject<MyTask>();
+            var task221 = ObjectSpace.CreateObject<EmployeeTask>();
             task221.Subject = "task221";
-            task221.AssignedUser = user22;
+            task221.AssignedTo = user22;
 
-            var task222 = ObjectSpace.CreateObject<MyTask>();
+            var task222 = ObjectSpace.CreateObject<EmployeeTask>();
             task222.Subject = "task222";
-            task222.AssignedUser = user22;
+            task222.AssignedTo = user22;
 
-            var task22Shared = ObjectSpace.CreateObject<MyTask>();
+            var task22Shared = ObjectSpace.CreateObject<EmployeeTask>();
             task22Shared.Subject = "task22Shared";
             task22Shared.IsSharedTask = true;
-            task22Shared.AssignedUser = user22;
+            task22Shared.AssignedTo = user22;
         }
 
 
@@ -184,18 +184,18 @@ public class Updater : ModuleUpdater {
         role.AddNavigationPermission("Application/NavigationItems/Items/Default/Items/MyTask_ListView", SecurityPermissionState.Allow);
 
         //Department
-        role.AddObjectPermissionFromLambda<Department>(SecurityOperations.FullObjectAccess, d => d.ApplicationUsers.Any(au => au.ID == (Guid)CurrentUserIdOperator.CurrentUserId()), SecurityPermissionState.Allow);
-        role.AddMemberPermissionFromLambda<Department>(SecurityOperations.ReadWriteAccess, nameof(Department.ApplicationUsers), d => d.ApplicationUsers.Any(au => au.ID == (Guid)CurrentUserIdOperator.CurrentUserId()), SecurityPermissionState.Allow);
+        role.AddObjectPermissionFromLambda<Department>(SecurityOperations.FullObjectAccess, d => d.Employees.Any(au => au.ID == (Guid)CurrentUserIdOperator.CurrentUserId()), SecurityPermissionState.Allow);
+        role.AddMemberPermissionFromLambda<Department>(SecurityOperations.ReadWriteAccess, nameof(Department.Employees), d => d.Employees.Any(au => au.ID == (Guid)CurrentUserIdOperator.CurrentUserId()), SecurityPermissionState.Allow);
 
         //ApplicationUser
         role.AddObjectPermissionFromLambda<ApplicationUser>(SecurityOperations.FullObjectAccess, au => au.ID == (Guid)CurrentUserIdOperator.CurrentUserId(), SecurityPermissionState.Allow);
-        role.AddObjectPermissionFromLambda<ApplicationUser>(SecurityOperations.ReadWriteAccess, au => au.Department.ApplicationUsers.Any(au2 => au2.ID == (Guid)CurrentUserIdOperator.CurrentUserId()), SecurityPermissionState.Allow);
+        role.AddObjectPermissionFromLambda<ApplicationUser>(SecurityOperations.ReadWriteAccess, au => au.Department.Employees.Any(au2 => au2.ID == (Guid)CurrentUserIdOperator.CurrentUserId()), SecurityPermissionState.Allow);
 
         //MyTask
-        role.AddObjectPermissionFromLambda<MyTask>(SecurityOperations.FullObjectAccess, t => t.AssignedUser.Department.ApplicationUsers.Any(au2 => au2.ID == (Guid)CurrentUserIdOperator.CurrentUserId()), SecurityPermissionState.Allow);
+        role.AddObjectPermissionFromLambda<EmployeeTask>(SecurityOperations.FullObjectAccess, t => t.AssignedTo.Department.Employees.Any(au2 => au2.ID == (Guid)CurrentUserIdOperator.CurrentUserId()), SecurityPermissionState.Allow);
 
         //DepartmentGoal
-        role.AddObjectPermissionFromLambda<DepartmentGoal>(SecurityOperations.FullObjectAccess, dr => dr.Department.ApplicationUsers.Any(au => au.ID == (Guid)CurrentUserIdOperator.CurrentUserId()), SecurityPermissionState.Allow);
+        role.AddObjectPermissionFromLambda<DepartmentGoal>(SecurityOperations.FullObjectAccess, dr => dr.Department.Employees.Any(au => au.ID == (Guid)CurrentUserIdOperator.CurrentUserId()), SecurityPermissionState.Allow);
 
         return role;
     }
@@ -210,18 +210,18 @@ public class Updater : ModuleUpdater {
         role.AddNavigationPermission("Application/NavigationItems/Items/Default/Items/MyTask_ListView", SecurityPermissionState.Allow);
 
         //Department
-        role.AddObjectPermissionFromLambda<Department>(SecurityOperations.Read, d => d.ApplicationUsers.Any(au => au.ID == (Guid)CurrentUserIdOperator.CurrentUserId()), SecurityPermissionState.Allow);
+        role.AddObjectPermissionFromLambda<Department>(SecurityOperations.Read, d => d.Employees.Any(au => au.ID == (Guid)CurrentUserIdOperator.CurrentUserId()), SecurityPermissionState.Allow);
 
         //ApplicationUser
         role.AddObjectPermissionFromLambda<ApplicationUser>(SecurityOperations.Read, au => au.ID == (Guid)CurrentUserIdOperator.CurrentUserId(), SecurityPermissionState.Allow);
-        role.AddObjectPermissionFromLambda<ApplicationUser>(SecurityOperations.Read, au => au.Department.ApplicationUsers.Any(au2 => au2.ID == (Guid)CurrentUserIdOperator.CurrentUserId()), SecurityPermissionState.Allow);
+        role.AddObjectPermissionFromLambda<ApplicationUser>(SecurityOperations.Read, au => au.Department.Employees.Any(au2 => au2.ID == (Guid)CurrentUserIdOperator.CurrentUserId()), SecurityPermissionState.Allow);
 
         //MyTask
-        role.AddObjectPermissionFromLambda<MyTask>(SecurityOperations.Read, t => t.AssignedUser.ID == (Guid)CurrentUserIdOperator.CurrentUserId(), SecurityPermissionState.Allow);
-        role.AddObjectPermissionFromLambda<MyTask>(SecurityOperations.Read, t => t.AssignedUser.Department.ApplicationUsers.Any(au => au.ID == (Guid)CurrentUserIdOperator.CurrentUserId()) && t.IsSharedTask, SecurityPermissionState.Allow);
+        role.AddObjectPermissionFromLambda<EmployeeTask>(SecurityOperations.Read, t => t.AssignedTo.ID == (Guid)CurrentUserIdOperator.CurrentUserId(), SecurityPermissionState.Allow);
+        role.AddObjectPermissionFromLambda<EmployeeTask>(SecurityOperations.Read, t => t.AssignedTo.Department.Employees.Any(au => au.ID == (Guid)CurrentUserIdOperator.CurrentUserId()) && t.IsSharedTask, SecurityPermissionState.Allow);
 
         //DepartmentGoal
-        role.AddObjectPermissionFromLambda<DepartmentGoal>(SecurityOperations.Read, dr => dr.Department.ApplicationUsers.Any(au => au.ID == (Guid)CurrentUserIdOperator.CurrentUserId()), SecurityPermissionState.Allow);
+        role.AddObjectPermissionFromLambda<DepartmentGoal>(SecurityOperations.Read, dr => dr.Department.Employees.Any(au => au.ID == (Guid)CurrentUserIdOperator.CurrentUserId()), SecurityPermissionState.Allow);
 
         return role;
     }
