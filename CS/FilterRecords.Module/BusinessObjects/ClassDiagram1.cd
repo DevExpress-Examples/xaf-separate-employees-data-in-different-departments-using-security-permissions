@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="FilterRecords.Module.BusinessObjects.ApplicationUser" BaseTypeListCollapsed="true">
+    <Position X="6" Y="8.25" Width="2.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <InheritanceLine Type="DevExpress.Persistent.BaseImpl.EF.PermissionPolicy.PermissionPolicyUser" ManuallyRouted="true" FixedFromPoint="true">
+      <Path>
+        <Point X="7.25" Y="7.213" />
+        <Point X="7.25" Y="8.25" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAgAAAAAEAAAAAAAAAAIAAAAQQA=</HashCode>
+      <FileName>BusinessObjects\ApplicationUser.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Department" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FilterRecords.Module.BusinessObjects.Department">
+    <Position X="9.75" Y="8.5" Width="1.75" />
+    <InheritanceLine Type="DevExpress.Persistent.BaseImpl.EF.BaseObject" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="7.375" Y="3.372" />
+        <Point X="7.375" Y="3.875" />
+        <Point X="11.903" Y="3.875" />
+        <Point X="11.903" Y="9.312" />
+        <Point X="11.5" Y="9.312" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAQAAAAAAIAA=</HashCode>
+      <FileName>BusinessObjects\Department.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FilterRecords.Module.BusinessObjects.DepartmentGoal">
+    <Position X="9.75" Y="6" Width="1.5" />
+    <InheritanceLine Type="DevExpress.Persistent.BaseImpl.EF.BaseObject" FixedFromPoint="true">
+      <Path>
+        <Point X="7.375" Y="3.372" />
+        <Point X="7.375" Y="3.875" />
+        <Point X="10.5" Y="3.875" />
+        <Point X="10.5" Y="6" />
+      </Path>
+    </InheritanceLine>
+    <AssociationLine Name="Department" Type="FilterRecords.Module.BusinessObjects.Department">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.124" Y="0.942" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BusinessObjects\DepartmentGoal.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Department" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FilterRecords.Module.BusinessObjects.EmployeeTask">
+    <Position X="3.25" Y="8.5" Width="1.5" />
+    <InheritanceLine Type="DevExpress.Persistent.BaseImpl.EF.BaseObject" FixedFromPoint="true">
+      <Path>
+        <Point X="7.375" Y="3.372" />
+        <Point X="7.375" Y="3.875" />
+        <Point X="4" Y="3.875" />
+        <Point X="4" Y="8.5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAQABAAAAAAA=</HashCode>
+      <FileName>BusinessObjects\EmployeeTask.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="AssignedTo" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="DevExpress.Persistent.BaseImpl.EF.PermissionPolicy.PermissionPolicyUser">
+    <Position X="6.25" Y="4.5" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <InheritanceLine Type="DevExpress.Persistent.BaseImpl.EF.BaseObject" FixedFromPoint="true">
+      <Path>
+        <Point X="7.375" Y="3.372" />
+        <Point X="7.375" Y="4.5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier />
+  </Class>
+  <Class Name="DevExpress.Persistent.BaseImpl.EF.BaseObject">
+    <Position X="6.5" Y="1.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
