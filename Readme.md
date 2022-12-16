@@ -5,6 +5,8 @@
 <!-- default badges end -->
 # How to separate employees data in different departments using security permissions in XPO
 
+> **Note**  
+> The description of this example is currently under construction and may not match the code in the example. We are currently working to provide you with up-to-date content.
 
 ## Scenario
 
