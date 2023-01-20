@@ -3,31 +3,41 @@
 [![](https://img.shields.io/badge/Open_in_DevExpress_Support_Center-FF7200?style=flat-square&logo=DevExpress&logoColor=white)](https://supportcenter.devexpress.com/ticket/details/E4045)
 [![](https://img.shields.io/badge/📖_How_to_use_DevExpress_Examples-e9f6fc?style=flat-square)](https://docs.devexpress.com/GeneralInformation/403183)
 <!-- default badges end -->
-# How to separate employees data in different departments using security permissions in XPO
-
-> **Note**  
-> The description of this example is currently under construction and may not match the code in the example. We are currently working to provide you with up-to-date content.
+# How to restrict inter-departmental data access using Security Permissions (EF Core)
 
 ## Scenario
 
-This example demonstrates how to use [XAF's security system](https://docs.devexpress.com/eXpressAppFramework/113366/concepts/security-system) to implement the following access control/authorization requirements:
-- Users Role (users: **Joe, John**) can view and edit tasks from their own department, but cannot delete or create tasks. Users also have readonly access to employees and other data of their own department.
+This example demonstrates how to use [XAF's Security System](https://docs.devexpress.com/eXpressAppFramework/113366/concepts/security-system) to implement the following access control/authorization requirements:
+
+- User Role (users: **user1, user12, user2, user22**) - read-only access to their own Department, corresponding Department Goals, an Employee list in that department, and Tasks assigned to these Employees.
 
   ![](./media/Users.png)
 
-- Managers Role (users: **Sam, Mary**) can fully manage (CRUD) their own department, its employees and tasks. Managers cannot access data from other departments.
+- Manager Role (users: **manager1, manager2**) - read-write access to their own Department, corresponding Department Goals, Employee list, and their Tasks. Managers can link or unlink existing entities. 
 
   ![](./media/Managers.png)
 
-- Administrators Role (users: **Admin**) can do everything within the application.
+- Administrator Role (users: **Admin**) - full access to all entities in the application. Administrators can create new entities. 
 
   ![](./media/Administrators.png)
 
-All users have empty passwords by default. [Functional tests](https://docs.devexpress.com/eXpressAppFramework/113211/concepts/debugging-testing-and-error-handling/functional-tests-easy-test) for these scenarios are in the *SolutionName.EasyTests* folder.
+You can login as any user. Type in a user name and an empty password. 
 
 ## Implementation Steps
 1. In the *SolutionName.Module/DatabaseUpdate/Updater* file, configure [security permissions](https://docs.devexpress.com/eXpressAppFramework/113366/concepts/security-system/security-system-overview) at the type, object and member level (with a criteria). To build complex criteria against associated objects, use the [ContainsOperator](https://docs.devexpress.com/CoreLibraries/DevExpress.Data.Filtering.ContainsOperator) together with the built-in `CurrentUserId` and `IsCurrentUserInRole` [criteria functions](http://documentation.devexpress.com/#xaf/CustomDocument3307).
-2. In the *SolutionName.XXX/XXXApplication* file, use the [SecuredObjectSpaceProvider](https://docs.devexpress.com/eXpressAppFramework/113437/task-based-help/security/how-to-change-the-client-side-security-mode-from-ui-level-to-integrated-in-xpo-applications) in the `CreateDefaultObjectSpaceProvider`method of the `XafApplication` descendants.
-3. In the *SolutionName.Module/BusinessObjects* folder, implement the `Department`, `DepartmentGoal` and `EmployeeTask` business classes ([class diagram](./media/ClassStructure.png).).
-4. In the *SolutionName.XXX/XXXApplication.Designer* file, set the `this.securityStrategyComplex1.UserType` and `this.securityModule1.UserType` properties to the `Employee` type and set the `this.securityStrategyComplex1.AssociationPermissionsMode` property to DevExpress.ExpressApp.Security.AssociationPermissionsMode.Manual. For more information, see [this help topic](https://docs.devexpress.com/eXpressAppFramework/DevExpress.ExpressApp.Security.SecurityStrategy.AssociationPermissionsMode).
-5. In the *SolutionName.Module/Controllers* folder, optionally implement a Controller to hide the protected content columns in a List View and Property Editors in a Detail View. For more information, see [this help topic](https://docs.devexpress.com/eXpressAppFramework/114008/task-based-help/security/how-to-hide-the-protected-content-columns-in-a-list-view-and-property-editors-in-a-detail-view).
+2. In the *SolutionName.Module/BusinessObjects* folder, implement the `Department`, `DepartmentGoal` and `EmployeeTask` business classes ([class diagram](./media/ClassStructure.png).).
+3. Set the following settings in the `builder.Security.UseIntegratedMode()` method call: 
+    ```cs
+    options.Events.OnSecurityStrategyCreated = securityStrategy => {
+        ((SecurityStrategy)securityStrategy).AssociationPermissionsMode = 
+          AssociationPermissionsMode.Manual;
+    };
+    options.RoleType = typeof(PermissionPolicyRole);
+    options.UserType = typeof(FilterRecords.Module.BusinessObjects.ApplicationUser);
+    options.UserLoginInfoType = 
+      typeof(FilterRecords.Module.BusinessObjects.ApplicationUserLoginInfo);
+    ```
+
+      For complete implementation, review the following files: [ApplicationBuilder.cs](.CS/FilterRecords.Win/ApplicationBuilder.cs) (WinForms module) and [Startup.cs](.CS/FilterRecords.Blazor.Server/Startup.cs) (Blazor module).
+
+4. In the *SolutionName.Module/Controllers* folder, optionally implement a Controller to hide the protected content columns in a List View and Property Editors in a Detail View. For more information, see [this help topic](https://docs.devexpress.com/eXpressAppFramework/114008/task-based-help/security/how-to-hide-the-protected-content-columns-in-a-list-view-and-property-editors-in-a-detail-view).
