@@ -40,7 +40,7 @@ public class FilterRecordsEFCoreDbContext : DbContext {
 	public DbSet<FilterRecords.Module.BusinessObjects.ApplicationUser> Users { get; set; }
     public DbSet<FilterRecords.Module.BusinessObjects.ApplicationUserLoginInfo> UserLoginInfos { get; set; }
     public DbSet<Department> Departments { get; set; }
-    public DbSet<EmployeeTask> MyTasks { get; set; }
+    public DbSet<MyTask> MyTasks { get; set; }
     public DbSet<DepartmentGoal> DepartmentGoals { get; set; }
     
 
