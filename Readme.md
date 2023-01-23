@@ -21,11 +21,13 @@ This example demonstrates how to use [XAF's Security System](https://docs.devexp
 
   ![](./media/Administrators.png)
 
+- All users can view shared Tasks. All managers can edit shared Tasks.
+
 You can login as any user. Type in a user name and an empty password. 
 
 ## Implementation Steps
 1. In the *SolutionName.Module/DatabaseUpdate/Updater* file, configure [security permissions](https://docs.devexpress.com/eXpressAppFramework/113366/concepts/security-system/security-system-overview) at the type, object and member level (with a criteria). To build complex criteria against associated objects, use the [ContainsOperator](https://docs.devexpress.com/CoreLibraries/DevExpress.Data.Filtering.ContainsOperator) together with the built-in `CurrentUserId` and `IsCurrentUserInRole` [criteria functions](http://documentation.devexpress.com/#xaf/CustomDocument3307).
-2. In the *SolutionName.Module/BusinessObjects* folder, implement the `Department`, `DepartmentGoal` and `EmployeeTask` business classes ([class diagram](./media/ClassStructure.png).).
+2. In the *SolutionName.Module/BusinessObjects* folder, implement the `Department`, `DepartmentGoal` and `MyTask` business classes.
 3. Set the following settings in the `builder.Security.UseIntegratedMode()` method call: 
     ```cs
     options.Events.OnSecurityStrategyCreated = securityStrategy => {
