@@ -8,11 +8,11 @@
 
 This example demonstrates how to use [XAF's Security System](https://docs.devexpress.com/eXpressAppFramework/113366/concepts/security-system) to implement the following access control/authorization requirements:
 
-- User Role (users: **user1, user12, user2, user22**) - read-only access to their own Department, corresponding Department Goals, an Employee list in that department, and Tasks assigned to these Employees.
+- User Role (users: **user1, user12, user2, user22**) - read-only access to their own Department, corresponding Department Goals, an User list in that department, and Tasks assigned to these User.
 
   ![](./media/Users.png)
 
-- Manager Role (users: **manager1, manager2**) - read-write access to their own Department, corresponding Department Goals, Employee list, and their Tasks. Managers can link or unlink existing entities. 
+- Manager Role (users: **manager1, manager2**) - read-write access to their own Department, corresponding Department Goals, User list, and their Tasks. Managers can link or unlink existing entities. 
 
   ![](./media/Managers.png)
 
