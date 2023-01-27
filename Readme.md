@@ -5,8 +5,6 @@
 <!-- default badges end -->
 # How to restrict inter-departmental data access using Security Permissions (EF Core)
 
-## Scenario
-
 This example demonstrates how to use [XAF's Security System](https://docs.devexpress.com/eXpressAppFramework/113366/concepts/security-system) to implement the following access control/authorization requirements:
 
 - User Role (users: **user1, user12, user2, user22**) - read-only access to their own Department, corresponding Department Goals, an User list in that department, and Tasks assigned to these User.
@@ -26,6 +24,7 @@ This example demonstrates how to use [XAF's Security System](https://docs.devexp
 You can login as any user. Type in a user name and an empty password. 
 
 ## Implementation Steps
+
 1. In the *SolutionName.Module/DatabaseUpdate/Updater* file, configure [security permissions](https://docs.devexpress.com/eXpressAppFramework/113366/concepts/security-system/security-system-overview) at the type, object and member level (with a criteria). To build complex criteria against associated objects, use the [ContainsOperator](https://docs.devexpress.com/CoreLibraries/DevExpress.Data.Filtering.ContainsOperator) together with the built-in `CurrentUserId` and `IsCurrentUserInRole` [criteria functions](http://documentation.devexpress.com/#xaf/CustomDocument3307).
 2. In the *SolutionName.Module/BusinessObjects* folder, implement the `Department`, `DepartmentGoal` and `MyTask` business classes.
 3. Set the following settings in the `builder.Security.UseIntegratedMode()` method call: 
@@ -43,3 +42,5 @@ You can login as any user. Type in a user name and an empty password.
       For complete implementation, review the following files: [ApplicationBuilder.cs](./CS/FilterRecords.Win/ApplicationBuilder.cs) (WinForms module) and [Startup.cs](./CS/FilterRecords.Blazor.Server/Startup.cs) (Blazor module).
 
 4. In the *SolutionName.Module/Controllers* folder, optionally implement a Controller to hide the protected content columns in a List View and Property Editors in a Detail View. For more information, see [this help topic](https://docs.devexpress.com/eXpressAppFramework/114008/task-based-help/security/how-to-hide-the-protected-content-columns-in-a-list-view-and-property-editors-in-a-detail-view).
+
+You can find implementation for XPO ORM in the [22.1.5+ branch](https://github.com/DevExpress-Examples/XAF_how-to-separate-employees-data-in-different-departments-using-security-permissions-in-xpo-e4045/tree/22.1.5+).
