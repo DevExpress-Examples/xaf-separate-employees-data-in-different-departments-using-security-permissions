@@ -43,4 +43,8 @@ You can log in as any user. Type in a user name and an empty password.
 
 4. In the *SolutionName.Module/Controllers* folder, optionally implement a Controller to hide the protected content columns in a List View and Property Editors in a Detail View. For more information, see [this help topic](https://docs.devexpress.com/eXpressAppFramework/114008/task-based-help/security/how-to-hide-the-protected-content-columns-in-a-list-view-and-property-editors-in-a-detail-view).
 
-You can find implementation details for the XPO ORM in the [18.2.2+ branch](https://github.com/DevExpress-Examples/XAF_how-to-separate-employees-data-in-different-departments-using-security-permissions-in-xpo-e4045/tree/18.2.2+).
+>**NOTE:** You can find implementation details for the XPO ORM in the [18.2.2+ branch](https://github.com/DevExpress-Examples/XAF_how-to-separate-employees-data-in-different-departments-using-security-permissions-in-xpo-e4045/tree/18.2.2+).
+
+
+## See Also
+[How to Implement a Multi-Tenant Application for Blazor and WinForms](https://www.devexpress.com/go/XAF_MultiTenancy_Example.aspx)
