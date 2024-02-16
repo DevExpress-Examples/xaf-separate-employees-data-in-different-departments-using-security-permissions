@@ -3,7 +3,8 @@
 [![](https://img.shields.io/badge/Open_in_DevExpress_Support_Center-FF7200?style=flat-square&logo=DevExpress&logoColor=white)](https://supportcenter.devexpress.com/ticket/details/E4045)
 [![](https://img.shields.io/badge/📖_How_to_use_DevExpress_Examples-e9f6fc?style=flat-square)](https://docs.devexpress.com/GeneralInformation/403183)
 <!-- default badges end -->
-# How to restrict inter-departmental data access using Security Permissions (EF Core)
+
+# XAF - How to restrict inter-departmental data access using Security Permissions (EF Core)
 
 This example demonstrates how to use [XAF's Security System](https://docs.devexpress.com/eXpressAppFramework/113366/concepts/security-system) to implement the following access control/authorization requirements:
 
@@ -23,7 +24,7 @@ This example demonstrates how to use [XAF's Security System](https://docs.devexp
 
 You can log in as any user. Type in a user name and an empty password. 
 
-## Implementation Steps
+## Implementation Details
 
 1. In the *SolutionName.Module/DatabaseUpdate/Updater* file, configure [security permissions](https://docs.devexpress.com/eXpressAppFramework/113366/concepts/security-system/security-system-overview) at the type, object, and member level (with criteria). To build complex criteria against associated objects, use the [ContainsOperator](https://docs.devexpress.com/CoreLibraries/DevExpress.Data.Filtering.ContainsOperator) together with the built-in `CurrentUserId` and `IsCurrentUserInRole` [criteria functions](http://documentation.devexpress.com/#xaf/CustomDocument3307).
 2. In the *SolutionName.Module/BusinessObjects* folder, implement the `Department`, `DepartmentGoal`, and `MyTask` business classes.
@@ -46,5 +47,5 @@ You can log in as any user. Type in a user name and an empty password.
 >**NOTE:** You can find implementation details for the XPO ORM in the [18.2.2+ branch](https://github.com/DevExpress-Examples/XAF_how-to-separate-employees-data-in-different-departments-using-security-permissions-in-xpo-e4045/tree/18.2.2+).
 
 
-## See Also
-[How to Implement a Multi-Tenant Application for Blazor and WinForms](https://www.devexpress.com/go/XAF_MultiTenancy_Example.aspx)
+## More Examples
+* [How to Implement a Multi-Tenant Application for Blazor and WinForms](https://www.devexpress.com/go/XAF_MultiTenancy_Example.aspx)
