@@ -55,6 +55,7 @@ public class Startup {
 #endif
                     ArgumentNullException.ThrowIfNull(connectionString);
                     options.UseSqlServer(connectionString);
+                    options.UseXafServiceProviderContainer(serviceProvider);
                     options.UseLazyLoadingProxies();
                     options.UseChangeTrackingProxies();
                     options.UseObjectSpaceLinkProxies();
