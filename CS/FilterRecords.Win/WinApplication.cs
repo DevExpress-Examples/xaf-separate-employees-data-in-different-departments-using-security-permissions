@@ -21,7 +21,6 @@ public class FilterRecordsWindowsFormsApplication : WinApplication {
 		SplashScreen = new DXSplashScreen(typeof(XafSplashScreen), new DefaultOverlayFormOptions());
         ApplicationName = "FilterRecords";
         CheckCompatibilityType = DevExpress.ExpressApp.CheckCompatibilityType.DatabaseSchema;
-        UseOldTemplates = false;
         DatabaseVersionMismatch += FilterRecordsWindowsFormsApplication_DatabaseVersionMismatch;
         CustomizeLanguagesList += FilterRecordsWindowsFormsApplication_CustomizeLanguagesList;
     }
